@@ -12,20 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-        $table->increments('id_order');
+        $table->id();
         $table->dateTime('order_date');
         $table->integer('total_amount');
         $table->bigInteger('total_price');
-        $table->text('table_number');
-        $table->text('order_number');
-        $table->integer('items')->unsigned();
+        $table->string('table_number');
+        $table->string('order_number');
+        $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
         $table->enum('status_order', ['pending', 'done']);
         $table->bigInteger('visitor_count');
-
-        // Foreign Key
-        $table->foreign('items')
-              ->references('id_product')->on('items')
-              ->onDelete('cascade');
+        $table->timestamps();
         });
     }
 

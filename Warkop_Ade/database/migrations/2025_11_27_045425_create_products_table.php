@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('product', function (Blueprint $table) {
-    $table->increments('id_product');
-    $table->text('name');
-    $table->bigInteger('price');
-    $table->string('image', 255)->nullable();
-    $table->integer('category')->unsigned();
-        });
+        Schema::create('products', function (Blueprint $table) {
+        $table->id(); // PRIMARY KEY standar Laravel: "id"
+        $table->string('name');
+        $table->bigInteger('price');
+        $table->string('image')->nullable();
+        $table->timestamps();
+});
+
     }
 
     /**
